@@ -15,6 +15,20 @@ A Neovim plugin to highlight programming symbols with 8 distinct colors.
 
 ## Notice
 - This plugin is tested by me, but totally written by Doubao (https://www.doubao.com)
-- My first github project was done by AI ^-^
+- My first github project was done by AI ^_^
 
 ## Install
+- AstroNvim (lazy.vim)
+  modify lua/plugins/user.lua:
+  1. comment the first line "if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE" (add '--' at the beginning)
+  2. add following configuration:
+        return {
+            {
+              "hendrikyang/nvim-wordhighlighter",
+              config = function()
+                require("wordhighlighter").setup()
+              end,
+              lazy = false
+            },
+        }
+- TODO: test with other package manager (suggest you to ask AI, for example, Doubao ^_^)
