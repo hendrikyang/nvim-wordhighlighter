@@ -2,14 +2,14 @@ local M = {}
 
 -- 8 distinct light/dark color pairs (high contrast)
 local colors = {
-  "#ffc0cb",   -- Pink
-  "#4caf50",   -- Green
-  "#2196f3",   -- Blue
-  "#ffeb3b",   -- Yellow
-  "#9c27b0",   -- Purple
-  "#ff9800",   -- Orange
-  "#00bcd4",   -- Cyan
-  "#f44336"    -- Dark red
+  "#ffc0cb", -- Pink
+  "#4caf50", -- Green
+  "#2196f3", -- Blue
+  "#ffeb3b", -- Yellow
+  "#9c27b0", -- Purple
+  "#ff9800", -- Orange
+  "#00bcd4", -- Cyan
+  "#f44336"  -- Dark red
 }
 
 -- Track state globally (shared across all buffers)
@@ -114,7 +114,7 @@ function M.clear_all_highlights()
     used_colors = {},
     available_colors = vim.deepcopy(colors)
   }
-  
+
   local bufs = vim.api.nvim_list_bufs()
   for _, buf in ipairs(bufs) do
     if vim.api.nvim_buf_is_valid(buf) then
@@ -129,19 +129,19 @@ function M.setup()
 
   -- Fix: Ensure proper keybinding syntax (common cause of "invalid '" errors)
   vim.keymap.set("n", "<leader>m", M.highlight_cursor_word, {
-    desc = "Toggle word highlight (global)",
+    desc = "Toggle highlight",
     noremap = true,
-    silent = true  -- Add silent to prevent command output
+    silent = true -- Add silent to prevent command output
   })
 
   vim.keymap.set("n", "<leader>M", M.clear_all_highlights, {
-    desc = "Clear all highlights (global)",
+    desc = "Clear all highlights",
     noremap = true,
     silent = true
   })
 
   -- Auto-highlight new buffers
-  vim.api.nvim_create_autocmd("BufEnter", {  -- Use BufEnter instead of BufLoad for better compatibility
+  vim.api.nvim_create_autocmd("BufEnter", { -- Use BufEnter instead of BufLoad for better compatibility
     pattern = "*",
     callback = function(args)
       if vim.api.nvim_buf_is_valid(args.buf) then
@@ -154,4 +154,3 @@ function M.setup()
 end
 
 return M
-
